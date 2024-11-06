@@ -3,9 +3,7 @@
 项目结合了最新版YOLOv5 进行目标检测和 DeepSORT 进行多目标跟踪，逻辑清晰
 
 ## 功能特点
-- **实时目标检测**：使用 YOLOv5 进行快速而准确的目标检测。
-- **多目标跟踪**：集成了 DeepSORT，可以在多帧之间保持目标的身份。
-- **可调设置**：可以轻松配置置信度阈值、输入视频和模型权重。
+yolov5+deepsort互相独立工作，推理流程非常清晰
 
 ## 依赖安装
 通过运行以下命令来安装所需的依赖项：
@@ -13,7 +11,7 @@
 pip install -r requirements.txt
 ```
 
-## 运行跟踪器
+## 运行
 要运行目标跟踪器，使用以下命令：
 ```sh
 python tracker.py --input_path ./data/video/demo.mp4 --weights yolov5/weights/best.pt
@@ -41,17 +39,4 @@ python tracker.py --input_path ./data/video/demo.mp4 --weights yolov5/weights/be
    pip install -r requirements.txt
    ```
 
-## 如何贡献
-- **Fork** 此仓库。
-- 创建一个新分支（`git checkout -b feature/YourFeature`）。
-- 提交你的更改（`git commit -m 'Add a new feature'`）。
-- 推送到新分支（`git push origin feature/YourFeature`）。
-- 打开一个 **Pull Request**。
-
-## 许可证
-本项目基于 MIT 许可证。详情请参阅 `LICENSE` 文件。
-
-## 鸣谢
-- YOLOv5：用于先进的目标检测。
-- DeepSORT：用于多目标跟踪。
 
