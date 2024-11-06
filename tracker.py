@@ -95,12 +95,19 @@ class VideoTracker:
     def prepare_for_deepsort(self, detections, frame):
         if detections is None or len(detections) == 0:
             return torch.zeros((0, 4)), torch.zeros((0, 1)), torch.zeros((0, 1))
-        img1_shape = (self.img_size, self.img_size)  
-        img0_shape = frame.shape[:2] 
+            
+        img1_shape = (self.img_size, self.img_size)  # 输入图像的尺寸 (height, width)
+        img0_shape = frame.shape[:2]  # 原始图像的尺寸 (height, width)
         detections[:, :4] = scale_boxes(img1_shape, detections[:, :4], img0_shape).round()
+
         bbox_xywh = xyxy2xywh(detections[:, :4])
-        confs = detections[:, 4:5] 
+        confs = detections[:, 4:5]  
         cls_ids = detections[:, 5:6] 
+
+        valid_indices = (bbox_xywh[:, 2] > 0) & (bbox_xywh[:, 3] > 0)
+        bbox_xywh = bbox_xywh[valid_indices]
+        confs = confs[valid_indices]
+        cls_ids = cls_ids[valid_indices]
 
         return bbox_xywh.cpu(), confs.cpu(), cls_ids.cpu()
 
